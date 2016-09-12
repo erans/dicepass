@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DicePass - Random Passpharse Generator</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/main.css" crossorigin="anonymous">
+    </head>
+    <body>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <h1 class="title">DicePass - Random Passpharse Generator</h1>
+            <p>
+              DicePass is based on <a href="https://eff.org/dice">EFF's Dice</a> which allows one to generate
+              a reasonably secure random pass phrase that is easier to remember than random characters.
+            </p>
+            <p>
+              <b>TLDR;</b> click the button and get a locally produced cryptographically sound random passpharse you can use as a
+              password and (more easily) remember</p>
+            <p>
+              <b>Long version: </b>
+              The original idea is based upon throwing a dice (or set of dices) to generate a 5 digits number.
+              You then look that number in a large list of words where each word is associated with one number from 11111 to 66666.
+              If you do that for 6 times you get a rather long
+            </p>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      	<div class="row">
+          <div class="col-md-2"></div>
+      		<div class="col-md-8">
+            <div class="generate">
+              <button id="generate-button" type="button" class="btn btn-lg btn-primary">Generate Passphrase</button>
+            </div>
+            <div class="result">
+            </div>
+      		</div>
+          <div class="col-md-2"></div>
+      	</div>
+        <div class="row">
+          Created by <a href="http://eran.sandler.co.il">Eran Sandler</a> <a href="https://twitter.com/erans">@erans</a> 2016
+        </div>
+      </div>
+
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="./js/eff_large_wordlist.js"></script>
+      <script type="text/javascript" src="./js/dicepass.js"></script>
+      <script type="text/javascript" src="./js/main.js"></script>
+    </body>
+</html>
