@@ -6,7 +6,7 @@ EFF's dice is a system that utilizes a dice (or 5 if you want it to be quicker) 
 ## Security
 **EVERYTHING RUNS LOCALLY IN THE BROWSER !**
 
-Everything runs in the local browser. You can run it locally (clone and open index.html), use the hosted version (https://dicepass.org).
+Everything runs in the local browser. You can run it locally (clone and open index.html) or use the hosted version at https://dicepass.org.
 
 ## How does it work?
 DicePass uses new browsers' native Javascript API for a Pseudo Random Number Generator (PRNG) - ```crypto.getRandomValues``` -  via the underlying operating system of the browser (so its cryptographically sound(er)) to mimic the throw of a dice - as if you were throwing it yourself. While this is considered by most people as less satisfying than throwing dices around, it generates results that are safe enough yet rememberable (not to mention it takes a lot less time).
