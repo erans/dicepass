@@ -1,5 +1,7 @@
 var DicePass = {
-  _hasBrowserCryptoSupport: function() {
+  DEFAULT_WORD_COUNT : 5,
+
+  HasBrowserCryptoSupport: function() {
     if ((window.crypto && window.crypto.getRandomValues) ||
       (window.msCrypto && window.msCrypto.getRandomValues)) {
       return true;
@@ -8,13 +10,25 @@ var DicePass = {
     return false;
   },
   _getRandomNumbers: function() {
-    var numbers = new Uint32Array(5);
-    if (this._hasBrowserCryptoSupport()) {
+    var numbers = new Uint32Array(this.DEFAULT_WORD_COUNT);
+    if (this.HasBrowserCryptoSupport()) {
       crypto = window.crypto ? window.crypto : window.msCrypto
       crypto.getRandomValues(numbers);
       return numbers;
+    } else {
+      // This is an older browser or a browser that do not support access to
+      // the OS's underlying Pseudo Random Number Generator (PRNG).
+      // We will use math random seeded random that is better than nothing,
+      // but this won't be cryptographically sound.
+      numbers = new Array();
+      for (var i = 0; i < this.DEFAULT_WORD_COUNT; i++) {
+        var v = isaac.rand();
+        if (v < 0) {
+          v = v * -1;
+        }
+        numbers.push(v);
+      }
     }
-
     return numbers;
   },
   Roll : function() {
