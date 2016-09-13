@@ -23,3 +23,22 @@
   margin-top: 50px;
   text-align: center;
 }
+
+.speak {
+  display: none;
+  text-align: right;
+}
+
+.logo {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.generation {
+  margin-bottom: 20px;
+}
+
+.main-text div p {
+  text-align: center;
+  font-size: 1.2em;
+}

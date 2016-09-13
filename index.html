@@ -4,35 +4,36 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>DicePass - Random Passpharse Generator</title>
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="css/main.css" crossorigin="anonymous">
+
+        <meta property="og:title" content="DicePass - Random Passpharse Generator" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://dicepass.org/" />
+        <meta property="og:image" content="https://dicepass.org/img/logo.png" />
     </head>
     <body>
       <a href="https://github.com/erans/dicepass"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
       <div class="container-fluid">
-        <div class="row">
+        <div class="row main-text">
           <div class="col-md-2"></div>
           <div class="col-md-8">
+            <div class="logo">
+              <img src="img/dice.png" alt="Dice"/>
+            </div>
             <h1 class="title">DicePass - Random Passpharse Generator</h1>
             <p>
-              DicePass is based on <a href="https://eff.org/dice">EFF's Dice</a> which allows one to generate
-              a reasonably secure random pass phrase that is easier to remember than random characters.
+              DicePass generates a (rather) secure password phrase that you can use a strong password.
             </p>
             <p>
-              <b>TLDR;</b> click the button and get a locally produced cryptographically sound random passpharse you can use as a
-              password and (more easily) remember</p>
-            <p>
-              <b>Long version: </b>
-              The original idea is based upon throwing a dice (or set of dices) to generate a 5 digits number.
-              You then look that number in a large list of words where each word is associated with one number from 11111 to 66666.
-              If you do that for 6 times you get a rather long
+              It uses a concept of throwing a dice to generate a number that map into words and is based on <b><a href="https://eff.org/dice">EFF's Dice</a></b>.
             </p>
           </div>
           <div class="col-md-2"></div>
         </div>
-      	<div class="row">
+      	<div class="row generation">
           <div class="col-md-2"></div>
       		<div class="col-md-8">
             <div class="generate">
@@ -40,19 +41,61 @@
             </div>
             <div class="result">
             </div>
+            <div class="speak">
+              <a id="speak" href="#"><i class="fa fa-volume-up" aria-hidden="true"></i> Speak</a>
+            </div>
       		</div>
           <div class="col-md-2"></div>
       	</div>
+        <div class="row">
+          <div class="col-md-2"></div>
+      		<div class="col-md-8">
+            <h3>How does EFF's Dice work?</h3>
+            <p>
+              EFF's dice passphrase works by throwing a dice 5 times (or 5 dices at the same time) to generate a 5 digits number (from 11111 to 66666).
+              That number is then mapped to a preprepared word list (such as <a href="https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt">this one</a>) and produces one word.
+            </p>
+            <p>
+              Repeating this process 6 times produces 6 words which combined generates a passphrase of about 2⁷⁷ (that's 221073919720733357899776) alternatives. Quite a lot indeed.
+            </p>
+            <h3>How does DicePass rolls the dice?</h3>
+            <p>
+              In newer browsers DicePass uses a new JavaScript API for Pseudo Random Number Generation (PRNG) called <code>crypto.getRandomValues</code>.
+              In newer browsers this PRNG uses the operating system's PRNG and produces cryptographically safe pseudo random numbers.
+            </p>
+            <p>
+              DicePass then takes these numbers and runs them through the Modulo 6 to mimc the 6 digits on a dice.
+            </p>
+            <p>
+              For older browsers or browser we use Javascript's Random - which is OK, but does not guarantee cryptographically sound pseudo random numbers.
+            </p>
+            <h3>Is this site secure? Will it steal my passpharse?</h3>
+            <p>
+              Everything running to produce your passphrase <b>runs only on your local browser</b>.
+            </p>
+            <p>
+              There is no server side request invovled. We DO NOT store any cookies on the browser and the whole project is open sourced.
+            </p>
+            <p>
+              Even the option of "Speaking" the passpharse to you uses a JavaScript project that produces everything locally on your on browser.
+            </p>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
         <div class="row footer">
-          Created by <a href="http://eran.sandler.co.il">Eran Sandler</a> (<a href="https://twitter.com/erans">@erans</a>) &copy; 2016
+          Created by <a href="http://eran.sandler.co.il">Eran Sandler</a> (<a href="https://twitter.com/erans">@erans</a>) &copy; 2016<br/>
+          The hosted site (<a href="https://dicepass.org">https://dicepass.org</a>) is hosted on <a href="https://netlify.com">Netlify</a>. Check them out, they rock!<br/>
+          <a href="https://github.com/erans/dicepass">Code Repository</a><br/>
         </div>
       </div>
+      <div id="audio"></div>
 
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/rita/1.1.40/rita-full.min.js"></script>
       <script type="text/javascript" src="./js/eff_large_wordlist.js"></script>
       <script type="text/javascript" src="./js/dicepass.js"></script>
-      <script type="text/javascript" src="./js/isaac.js"></script>
+      <script type="text/javascript" src="./js/vendor/isaac.js"></script>
       <script type="text/javascript" src="./js/main.js"></script>
     </body>
 </html>
