@@ -4,6 +4,11 @@ var DicePass = {
   HasBrowserCryptoSupport: function() {
     if ((window.crypto && window.crypto.getRandomValues) ||
       (window.msCrypto && window.msCrypto.getRandomValues)) {
+        
+      if(Uint32Array.prototype.join === undefined) {
+        Uint32Array.prototype.join = Array.prototype.join;
+      }
+        
       return true;
     }
 
@@ -42,7 +47,10 @@ var DicePass = {
     var diceResult = new Array();
     for (i in numbers) {
       var diceNumber = (numbers[i] % 6)+1;
-      diceResult.push(diceNumber);
+      
+      if(diceResult !== NaN) {
+        diceResult.push(diceNumber);
+      }
     }
 
     return diceResult;
