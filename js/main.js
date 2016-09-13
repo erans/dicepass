@@ -6,8 +6,6 @@ $(document).ready( function() {
   $("#generate-button").click( function(e) {
     e.preventDefault();
     var passphraseWords = DicePass.GeneratePassPhrase(EFF_LARGE_WORDLIST);
-    window._lastResult = passphraseWords;
-    console.log(RiTa.getPosTags(passphraseWords));
 
     $(".result").text(passphraseWords.join("    "));
     $(".result").show();
