@@ -1,4 +1,4 @@
-# DicePass - Digital version of EFF's dice (http://eff.org/dice)
+# [DicePass](https://dicepass.org) - Digital version of EFF's dice (http://eff.org/dice)
 Written by Eran Sandler ([@erans](https://twitter.com/erans)) http://eran.sandler.co.il (c) 2016
 
 EFF's dice is a system that utilizes a dice (or 5 if you want it to be quicker) to generate a 5 digits number. Once you have 6 such numbers you search each one in a long words list ([like this one](https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt)) which helps you to generate a passphrase that you can (more easily) remember than a random set of characters.
