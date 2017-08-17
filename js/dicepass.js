@@ -15,10 +15,20 @@ var DicePass = {
     return false;
   },
   _getRandomNumbers: function() {
-    var numbers = new Uint32Array(this.DEFAULT_WORD_COUNT);
+    // Because there are only 6 values on a die, an 8-bit number is sufficient
+    var numbers = new Uint8Array(this.DEFAULT_WORD_COUNT);
     if (this.HasBrowserCryptoSupport()) {
       crypto = window.crypto ? window.crypto : window.msCrypto
       crypto.getRandomValues(numbers);
+      for (var i = 0; i < this.DEFAULT_WORD_COUNT; i++) {
+        // 256 is not a multiple of 6, so an 8-bit number is biased.
+        // 252 is a multiple of 6, so wee need to stay within [0,251].
+        while (numbers[i] >= 252) {
+          var tmp = new Uint8Array(1);
+          crypto.getRandomValues(tmp);
+          numbers[i] = tmp[0];
+        }
+      }
       return numbers;
     } else {
       // This is an older browser or a browser that do not support access to
@@ -44,6 +54,7 @@ var DicePass = {
         return numbers;
     }
 
+    // at this point, numbers[] has unbiased numbers mod 6
     var diceResult = new Array();
     for (i in numbers) {
       var diceNumber = (numbers[i] % 6)+1;
