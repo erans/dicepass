@@ -37,8 +37,8 @@ var DicePass = {
       // but this won't be cryptographically sound.
       numbers = new Array();
       for (var i = 0; i < this.DEFAULT_WORD_COUNT; i++) {
-        numbers.push(Math.abs(isaac.rand())); // range: [0, 2147483648]
-        // 2147483648 is not divisible by 6, so force a range that is:
+        numbers.push(isaac.rand() & 0x7fffffff); // range: [0, 2147483647]
+        // 2147483647 is not divisible by 6, so force a range that is:
         while(numbers[i] >= 2147483646) {
           numbers[i] = Math.abs(isaac.rand());
         }
